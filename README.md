@@ -7,21 +7,21 @@
 [![Latest Stable Release](https://img.shields.io/github/v/release/pkgforge-dev/OpenTESArena-AppImage)](https://github.com/pkgforge-dev/OpenTESArena-AppImage/releases/latest)
 
 <p align="center">
-  <img src="https://github.com/Link4Electronics/OpenTESArena-AppImage/blob/main/AppDir/opentesarena.png" width="128" />
+  <img src="https://github.com/pkgforge-dev/OpenTESArena-AppImage/blob/main/AppDir/opentesarena.png" width="128" />
 </p>
 
 
-| Latest Stable Release | Latest Nightly Relase | Upstream URL |
+| Latest Stable Release | Latest Nightly Release | Upstream URL |
 | :---: | :---: | :---: |
 | [Click here](https://github.com/pkgforge-dev/OpenTESArena-AppImage/releases/latest) | [Click here](https://github.com/pkgforge-dev/OpenTESArena-AppImage/releases/tag/nightly) | [Click here](https://github.com/afritz1/OpenTESArena) |
 
 </div>
 
-### ⚠️ Put assets `ARENA` directory inside `~/.config/OpenTESArena/data` ⚠️
+### ⚠️ Place `ARENA` directory inside `~/.config/OpenTESArena/data` ⚠️
 
 ---
 
-AppImage made using [sharun](https://github.com/VHSgunzo/sharun) and its wrapper [quick-sharun](https://github.com/pkgforge-dev/Anylinux-AppImages/blob/main/useful-tools/quick-sharun.sh), which makes it extremely easy to turn any binary into a portable package reliably without using containers or similar tricks. 
+AppImage made using [quick-sharun](https://github.com/pkgforge-dev/Anylinux-AppImages/blob/main/useful-tools/quick-sharun.sh), which makes it extremely easy to turn any binary into a portable package reliably without using containers or similar tricks. 
 
 **This AppImage bundles everything and it should work on any Linux distro, including old and musl-based ones.**
 
