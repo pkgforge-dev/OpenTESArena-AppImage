@@ -41,15 +41,15 @@ wget https://github.com/afritz1/OpenTESArena/releases/download/opentesarena-0.1.
 bsdtar -xvf eawpats.zip -C data
 mkdir build && cd build
 if [ "$ARCH" = "x86_64" ]; then
-cmake .. -DCMAKE_BUILD_TYPE=ReleaseNative
+	cmake .. -DCMAKE_BUILD_TYPE=ReleaseNative
 else
-cmake .. \
-    -DCMAKE_BUILD_TYPE=ReleaseNative \
-    -DUSE_SSE4_1=OFF -DUSE_SSE4_2=OFF \
-    -DUSE_AVX=OFF -DUSE_AVX2=OFF \
-    -DUSE_AVX512=OFF -DUSE_LZCNT=OFF \
-    -DUSE_TZCNT=OFF -DUSE_F16C=OFF \
-    -DUSE_FMADD=OFF
+	cmake .. \
+    	-DCMAKE_BUILD_TYPE=ReleaseNative \
+    	-DUSE_SSE4_1=OFF -DUSE_SSE4_2=OFF \
+    	-DUSE_AVX=OFF -DUSE_AVX2=OFF \
+    	-DUSE_AVX512=OFF -DUSE_LZCNT=OFF \
+    	-DUSE_TZCNT=OFF -DUSE_F16C=OFF \
+    	-DUSE_FMADD=OFF
 fi
 make -j$(nproc)
 mv -v otesa ../../AppDir/bin
