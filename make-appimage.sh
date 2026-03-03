@@ -12,6 +12,7 @@ export DEPLOY_VULKAN=1
 
 # Deploy dependencies
 quick-sharun ./AppDir/bin/otesa
+echo 'SHARUN_WORKING_DIR=${SHARUN_DIR}/bin' >> ./AppDir/.env
 
 # Additional changes can be done in between here
 
