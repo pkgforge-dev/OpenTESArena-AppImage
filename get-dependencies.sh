@@ -32,7 +32,7 @@ if [ "${DEVEL_RELEASE-}" = 1 ]; then
 else
 	echo "Making stable build of OpenTESArena..."
 	VERSION="$(git ls-remote --tags --sort="v:refname" "$REPO" | tail -n1 | sed 's/.*\///; s/\^{}//')"
-	git clone --branch v"$VERSION" --single-branch "$REPO" ./OpenTESArena
+	git clone --branch "$VERSION" --single-branch "$REPO" ./OpenTESArena
 fi
 echo "$VERSION" > ~/version
 
