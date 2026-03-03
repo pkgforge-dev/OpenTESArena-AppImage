@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=OpenTESArena
+Comment="Open-source re-implementation of The Elder Scrolls: Arena"
+Exec=opentesa
+Icon=opentesa
+StartupWMClass=
+Terminal=false
+Categories=Game;Adventure;
