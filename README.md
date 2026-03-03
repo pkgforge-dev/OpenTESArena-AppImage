@@ -1,6 +1,6 @@
 <div align="center">
 
-# OpenTESArena-AppImage 🐧
+# WIP DON'T USE YETOpenTESArena-AppImage 🐧
 
 [![GitHub Downloads](https://img.shields.io/github/downloads/pkgforge-dev/OpenTESArena-AppImage/total?logo=github&label=GitHub%20Downloads)](https://github.com/pkgforge-dev/OpenTESArena-AppImage/releases/latest)
 [![CI Build Status](https://github.com/pkgforge-dev/OpenTESArena-AppImage/actions/workflows/appimage.yml/badge.svg)](https://github.com/pkgforge-dev/OpenTESArena-AppImage/releases/latest)
