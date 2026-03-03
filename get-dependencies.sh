@@ -60,6 +60,7 @@ else
     	-DUSE_FMADD=OFF
 fi
 make -j$(nproc)
+cd ..
 mv -v otesa ../../AppDir/bin
 cd ..
 mv -v options ../AppDir/bin
