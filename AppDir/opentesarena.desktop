@@ -4,6 +4,6 @@ Name=OpenTESArena
 Comment="Open-source re-implementation of The Elder Scrolls: Arena"
 Exec=otesa
 Icon=opentesarena
-StartupWMClass=
+StartupWMClass=otesa
 Terminal=false
 Categories=Game;Adventure;
