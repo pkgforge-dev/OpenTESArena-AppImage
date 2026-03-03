@@ -20,11 +20,34 @@ get-debloated-pkgs --add-common --prefer-nano
 #make-aur-package PACKAGENAME
 
 # If the application needs to be manually built that has to be done down here
+echo "Building OpenTESArena..."
+echo "---------------------------------------------------------------"
+REPO="https://github.com/afritz1/OpenTESArena"
+if [ "${DEVEL_RELEASE-}" = 1 ]; then
+    echo "Making nightly build of OpenTESArena..."
+    echo "---------------------------------------------------------------"
+    VERSION="$(git ls-remote "$REPO" HEAD | cut -c 1-9 | head -1)"
+    git clone "$REPO" ./OpenTESArena
+else
+	echo "Making stable build of OpenTESArena..."
+	VERSION="$(git ls-remote --tags --sort="v:refname" "$REPO" | tail -n1 | sed 's/.*\///; s/\^{}//')"
+	git clone --branch v"$VERSION" --single-branch "$REPO" ./OpenTESArena
+fi
+echo "$VERSION" > ~/version
 
-# if you also have to make nightly releases check for DEVEL_RELEASE = 1
-#
-# if [ "${DEVEL_RELEASE-}" = 1 ]; then
-# 	nightly build steps
-# else
-# 	regular build steps
-# fi
+mkdir -p ./AppDir/bin
+cd ./OpenTESArena
+mkdir build && cd build
+if [ "$ARCH" = "x86_64" ]; then
+cmake .. -DCMAKE_BUILD_TYPE=ReleaseNative
+else
+cmake .. \
+    -DCMAKE_BUILD_TYPE=ReleaseNative \
+    -DUSE_SSE4_1=OFF -DUSE_SSE4_2=OFF \
+    -DUSE_AVX=OFF -DUSE_AVX2=OFF \
+    -DUSE_AVX512=OFF -DUSE_LZCNT=OFF \
+    -DUSE_TZCNT=OFF -DUSE_F16C=OFF \
+    -DUSE_FMADD=OFF
+fi
+make -j$(nproc)
+mv -v otesa ../../AppDir/bin
