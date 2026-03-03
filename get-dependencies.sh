@@ -9,6 +9,7 @@ echo "---------------------------------------------------------------"
 pacman -Syu --noconfirm \
     cmake    \
     libdecor \
+	openal	 \
     sdl2     \
     wildmidi
 
