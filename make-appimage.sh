@@ -5,19 +5,19 @@ set -eu
 ARCH=$(uname -m)
 export ARCH
 export OUTPATH=./dist
-export ADD_HOOKS="self-updater.bg.hook"
+export ADD_HOOKS="self-updater.hook"
 export UPINFO="gh-releases-zsync|${GITHUB_REPOSITORY%/*}|${GITHUB_REPOSITORY#*/}|latest|*$ARCH.AppImage.zsync"
-export DESKTOP=PATH_OR_URL_TO_DESKTOP_ENTRY
+export DEPLOY_PIPEWIRE=1
 export DEPLOY_VULKAN=1
 
 # Deploy dependencies
-quick-sharun ./AppDir/bin/otesa
-
-# Additional changes can be done in between here
+quick-sharun ./AppDir/bin/otesa /usr/lib/libopenal.so* /usr/lib/libWildMidi.so*
+# this app has problems with other locales breaking physics
+echo 'LC_ALL=C.UTF-8' >> ./AppDir/.env
 
 # Turn AppDir into AppImage
 quick-sharun --make-appimage
 
 # Test the app for 12 seconds, if the test fails due to the app
 # having issues running in the CI use --simple-test instead
-quick-sharun --test ./dist/*.AppImage
+quick-sharun --simple-test ./dist/*.AppImage
