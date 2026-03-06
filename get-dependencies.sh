@@ -62,5 +62,5 @@ fi
 make -j$(nproc)
 mv -v otesa ../../AppDir/bin
 cd ..
-mv -v options ../AppDir/bin
+mv -v options/options-default.txt ../AppDir/bin
 mv -v data ../AppDir/bin
