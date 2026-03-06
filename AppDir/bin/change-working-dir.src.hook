@@ -11,5 +11,6 @@ if [ ! -f "$dir"/data/Clocks.txt ]; then
     -e "s|^ArenaSavesPath=.*|ArenaSavesPath=$MY_HOME/.config/OpenTESArena/data/ArenaSaves|" \
     "$dir"/options/options-default.txt
 fi
+ln -sf "$dir"/options/options-default.txt "$APPDIR"/options/options-default.txt 
 #ln -sf "$APPDIR"/bin/otesa "$dir"
 cd "$dir"
