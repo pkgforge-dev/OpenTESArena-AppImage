@@ -1,9 +1,9 @@
 #!/bin/false
 dir=${XDG_CONFIG_HOME:-~/.config}/OpenTESArena
-mkdir -p "$dir"
+mkdir -p "$dir"/options
 if [ ! -f "$dir"/data/Clocks.txt ]; then
   cp -r "$APPDIR"/bin/data "$dir"
-  cp -r "$APPDIR"/bin/options "$dir"
+  cp "$APPDIR"/bin/options-default.txt "$dir"/options
   MY_HOME=$(echo $HOME)
   sed -i \
     -e "s|^ArenaPaths=.*|ArenaPaths=$MY_HOME/.config/OpenTESArena/data/ARENA|" \
@@ -11,5 +11,5 @@ if [ ! -f "$dir"/data/Clocks.txt ]; then
     -e "s|^ArenaSavesPath=.*|ArenaSavesPath=$MY_HOME/.config/OpenTESArena/data/ArenaSaves|" \
     "$dir"/options/options-default.txt
 fi
-ln -sf "$APPDIR"/bin/otesa "$dir"
+#ln -sf "$APPDIR"/bin/otesa "$dir"
 cd "$dir"
