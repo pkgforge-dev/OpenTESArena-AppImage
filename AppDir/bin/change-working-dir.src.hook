@@ -13,3 +13,4 @@ if [ ! -f "$dir"/data/Clocks.txt ]; then
 fi
 #ln -sf "$APPDIR"/bin/otesa "$dir"
 cd "$dir"
+exec "$APPDIR"/bin/otesa "$@"
