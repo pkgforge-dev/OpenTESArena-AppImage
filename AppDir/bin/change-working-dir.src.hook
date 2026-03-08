@@ -4,11 +4,10 @@ mkdir -p "$dir"/options
 if [ ! -f "$dir"/data/Clocks.txt ]; then
   cp -r "$APPDIR"/bin/data "$dir"
   cp "$APPDIR"/bin/options-default.txt "$dir"/options
-  MY_HOME=$(echo $HOME)
   sed -i \
-    -e "s|^ArenaPaths=.*|ArenaPaths=$MY_HOME/.config/OpenTESArena/data/ARENA|" \
-    -e "s|^MidiConfig=.*|MidiConfig=$MY_HOME/.config/OpenTESArena/data/eawpats/timidity.cfg|" \
-    -e "s|^ArenaSavesPath=.*|ArenaSavesPath=$MY_HOME/.config/OpenTESArena/data/ArenaSaves|" \
+    -e "s|^ArenaPaths=.*|ArenaPaths=$dir/data/ARENA|" \
+    -e "s|^MidiConfig=.*|MidiConfig=$dir/data/eawpats/timidity.cfg|" \
+    -e "s|^ArenaSavesPath=.*|ArenaSavesPath=$dir/data/ArenaSaves|" \
     "$dir"/options/options-default.txt
 fi
 #ln -sf "$APPDIR"/bin/otesa "$dir"
