@@ -12,4 +12,4 @@ if [ ! -f "$dir"/data/Clocks.txt ]; then
 fi
 #ln -sf "$APPDIR"/bin/otesa "$dir"
 cd "$dir"
-export APPDIR=$dir
+#export APPDIR=$dir
