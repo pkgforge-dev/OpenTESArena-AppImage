@@ -1,4 +1,4 @@
-#!/bin/false
+#!/bin/sh
 dir=${XDG_CONFIG_HOME:-~/.config}/OpenTESArena
 mkdir -p "$dir"/options
 if [ ! -f "$dir"/data/Clocks.txt ]; then
