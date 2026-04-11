@@ -60,6 +60,7 @@ else
     	-DUSE_FMADD=OFF
 fi
 make -j$(nproc)
+patchelf --set-rpath '$ORIGIN/data' otesa
 mv -v otesa ../../AppDir/bin
 cd ..
 mv -v options/options-default.txt ../AppDir/bin
