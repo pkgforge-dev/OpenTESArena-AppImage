@@ -1,5 +1,5 @@
 #!/bin/sh
-dir=${XDG_CONFIG_HOME:-~/.config}/OpenTESArena
+dir=$CONFIGDIR/OpenTESArena
 mkdir -p "$dir"/options
 if [ ! -f "$dir"/data/Clocks.txt ]; then
   cp -r "$APPDIR"/bin/data "$dir"
