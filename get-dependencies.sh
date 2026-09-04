@@ -10,6 +10,8 @@ pacman -Syu --noconfirm \
     cmake   	   \
 	glslang		   \
 	openal	 	   \
+	pipewire-audio \
+	pipewire-jack  \
     sdl2     	   \
 	shaderc		   \
 	vulkan-headers \
