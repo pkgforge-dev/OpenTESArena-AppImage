@@ -29,8 +29,9 @@ if [ "${DEVEL_RELEASE-}" = 1 ]; then
     git clone "$REPO" ./OpenTESArena
 else
 	echo "Making stable build of OpenTESArena..."
-	VERSION="$(git ls-remote --tags --sort="v:refname" "$REPO" | tail -n1 | sed 's/.*\///; s/\^{}//')"
-	git clone --branch "$VERSION" --single-branch "$REPO" ./OpenTESArena
+	TAG="$(git ls-remote --tags --sort="v:refname" "$REPO" | tail -n1 | sed 's/.*\///; s/\^{}//')"
+	VERSION="$(echo "$TAG" | sed 's/opentesarena-//')"
+	git clone --branch "$TAG" --single-branch "$REPO" ./OpenTESArena
 fi
 echo "$VERSION" > ~/version
 
@@ -39,21 +40,17 @@ cd ./OpenTESArena
 wget https://github.com/afritz1/OpenTESArena/releases/download/opentesarena-0.1.0/eawpats.zip
 bsdtar -xvf eawpats.zip -C data
 mkdir build && cd build
-if [ "$ARCH" = "x86_64" ]; then
-	cmake .. -DCMAKE_BUILD_TYPE=ReleaseNative
-else
-	cmake .. \
-    	-DCMAKE_BUILD_TYPE=ReleaseNative \
-    	-DUSE_SSE4_1=OFF \
-		-DUSE_SSE4_2=OFF \
-    	-DUSE_AVX=OFF \
-		-DUSE_AVX2=OFF \
-    	-DUSE_AVX512=OFF \
-		-DUSE_LZCNT=OFF \
-    	-DUSE_TZCNT=OFF \
-		-DUSE_F16C=OFF \
-    	-DUSE_FMADD=OFF
-fi
+cmake .. \
+    -DCMAKE_BUILD_TYPE=ReleaseGeneric \
+    -DUSE_SSE4_1=OFF \
+	-DUSE_SSE4_2=OFF \
+    -DUSE_AVX=OFF \
+	-DUSE_AVX2=OFF \
+    -DUSE_AVX512=OFF \
+	-DUSE_LZCNT=OFF \
+    -DUSE_TZCNT=OFF \
+	-DUSE_F16C=OFF \
+    -DUSE_FMADD=OFF
 make -j$(nproc)
 patchelf --set-rpath '$ORIGIN/data' otesa
 mv -v otesa ../../AppDir/bin
