@@ -55,5 +55,5 @@ make -j$(nproc)
 patchelf --set-rpath '$ORIGIN/data' otesa
 mv -v otesa ../../AppDir/bin
 cd ..
-mv -v options/options-default.txt ../AppDir/bin
+mkdir -p ../AppDir/bin/options && mv -v options/options-default.txt ../AppDir/bin/options
 mv -v data ../AppDir/bin

@@ -1,15 +1,14 @@
 #!/bin/sh
-dir=$CONFIGDIR/OpenTESArena
-mkdir -p "$dir"/options
-if [ ! -f "$dir"/data/Clocks.txt ]; then
-  cp -r "$APPDIR"/bin/data "$dir"
-  cp "$APPDIR"/bin/options-default.txt "$dir"/options
+CONFDIR="${XDG_CONFIG_HOME:-$HOME/.config}/OpenTESArena"
+DATADIR="${XDG_DATA_HOME:-$HOME/.local/share}/OpenTESArena"
+mkdir -p "$CONFDIR/options" "$DATADIR"
+if [ ! -f "$DATADIR/ARENA/Clocks.txt" ]; then
+  cp -r "$APPDIR"/bin/data "$DATADIR"
+  cp "$APPDIR"/bin/options/options-default.txt "$CONFDIR/options"
   sed -i \
-    -e "s|^ArenaPaths=.*|ArenaPaths=$dir/data/ARENA|" \
-    -e "s|^MidiConfig=.*|MidiConfig=$dir/data/eawpats/timidity.cfg|" \
-    -e "s|^ArenaSavesPath=.*|ArenaSavesPath=$dir/data/ArenaSaves|" \
-    "$dir"/options/options-default.txt
+    -e "s|^ArenaPaths=.*|ArenaPaths=$DATADIR/ARENA|" \
+    -e "s|^MidiConfig=.*|MidiConfig=$DATADIR/eawpats/timidity.cfg|" \
+    -e "s|^ArenaSavesPath=.*|ArenaSavesPath=$DATADIR/ArenaSaves|" \
+    "$CONFDIR/options/options-default.txt"
 fi
-#ln -sf "$APPDIR"/bin/otesa "$dir"
-cd "$dir"
-#export APPDIR=$dir
+cd "$CONFDIR"
