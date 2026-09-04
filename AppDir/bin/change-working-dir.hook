@@ -1,13 +1,7 @@
 #!/bin/sh
 dir=$CONFIGDIR/OpenTESArena
-mkdir -p "$dir"/options
+mkdir -p "$dir"
 if [ ! -f "$dir"/data/Clocks.txt ]; then
   cp -r "$APPDIR"/bin/data "$dir"
-  cp "$APPDIR"/bin/options/options-default.txt "$dir"/options
-  sed -i \
-    -e "s|^ArenaPaths=.*|ArenaPaths=$dir/data/ARENA|" \
-    -e "s|^MidiConfig=.*|MidiConfig=$dir/data/eawpats/timidity.cfg|" \
-    -e "s|^ArenaSavesPath=.*|ArenaSavesPath=$dir/data/ArenaSaves|" \
-    "$dir"/options/options-default.txt
 fi
 cd "$dir"
