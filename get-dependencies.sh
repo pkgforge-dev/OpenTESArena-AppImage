@@ -52,7 +52,6 @@ cmake .. \
 	-DUSE_F16C=OFF \
     -DUSE_FMADD=OFF
 make -j$(nproc)
-patchelf --set-rpath '$ORIGIN/data' otesa
 mv -v otesa ../../AppDir/bin
 cd ..
 mkdir -p ../AppDir/bin/options && mv -v options/options-default.txt ../AppDir/bin/options
