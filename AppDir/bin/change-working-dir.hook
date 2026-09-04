@@ -1,7 +1,10 @@
 #!/bin/sh
 dir=$CONFIGDIR/OpenTESArena
-mkdir -p "$dir"
+mkdir -p "$dir"/options "$dir"/data
 if [ ! -f "$dir"/data/Clocks.txt ]; then
   cp -r "$APPDIR"/bin/data "$dir"
+fi
+if [ ! -f "$dir"/options/options-default.txt ]; then
+  cp "$APPDIR"/bin/options/options-default.txt "$dir"/options
 fi
 cd "$dir"
