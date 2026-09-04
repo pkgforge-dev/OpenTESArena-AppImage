@@ -17,7 +17,7 @@
 
 </div>
 
-### ⚠️ Put assets `ARENA` directory inside `~/.config/OpenTESArena/data` ⚠️
+### ⚠️ Place `ARENA` directory inside `~/.config/OpenTESArena/data` ⚠️
 
 ---
 
