@@ -2,9 +2,73 @@
 dir=$CONFIGDIR/OpenTESArena
 mkdir -p "$dir"/options "$dir"/data
 if [ ! -f "$dir"/data/Clocks.txt ]; then
-  cp -r "$APPDIR"/bin/data "$dir"
+  cp -r "$APPDIR"/bin/data "$dir" 2>/dev/null || true
 fi
 if [ ! -f "$dir"/options/options-default.txt ]; then
-  cp "$APPDIR"/bin/options/options-default.txt "$dir"/options
+  cp "$APPDIR"/bin/options/options-default.txt "$dir"/options 2>/dev/null || true
 fi
+# The engine resolves relative paths (ArenaPaths, MidiConfig, ArenaSavesPath)
+# against the executable's directory (SDL_GetBasePath), not the working dir, so
+# inject absolute paths into options-changes.txt before the game reads it.
+# Rewrite the file each run (idempotent): strip the managed keys and keep the
+# rest, inserting them under the sections the options schema expects
+# (ArenaPaths/ArenaSavesPath under [Misc], MidiConfig under [Audio]). Duplicate
+# [*] sections would fail the options parser, so each is added at most once.
+arena="$dir/data/ARENACD,$dir/data/ARENA"
+midi="$dir/data/eawpats/timidity.cfg"
+saves="$dir/data/ArenaSaves"
+changes="$dir/options/options-changes.txt"
+tmp="$changes.hook"
+
+if [ -f "$changes" ]; then
+  input="$changes"
+else
+  input=/dev/null
+fi
+{
+  section=
+  saw_misc=0
+  saw_audio=0
+  emitted_misc=0
+  emitted_audio=0
+  while IFS= read -r line; do
+    case "$line" in
+      '['*)
+        section=other
+        if [ "$line" = "[Misc]" ]; then
+          section=misc
+          saw_misc=1
+        elif [ "$line" = "[Audio]" ]; then
+          section=audio
+          saw_audio=1
+        fi
+        printf '%s\n' "$line"
+        if [ "$section" = misc ] && [ "$emitted_misc" = 0 ]; then
+          printf 'ArenaPaths=%s\n' "$arena"
+          printf 'ArenaSavesPath=%s\n' "$saves"
+          emitted_misc=1
+        elif [ "$section" = audio ] && [ "$emitted_audio" = 0 ]; then
+          printf 'MidiConfig=%s\n' "$midi"
+          emitted_audio=1
+        fi
+        ;;
+      *)
+        case "$section:$line" in
+          misc:ArenaPaths=*|misc:ArenaSavesPath=*|audio:MidiConfig=*|other:MidiConfig=*|other:ArenaPaths=*|other:ArenaSavesPath=*) ;;
+          *) printf '%s\n' "$line" ;;
+        esac
+        ;;
+    esac
+  done < "$input"
+  if [ "$saw_misc" = 0 ]; then
+    printf '[Misc]\n'
+    printf 'ArenaPaths=%s\n' "$arena"
+    printf 'ArenaSavesPath=%s\n' "$saves"
+  fi
+  if [ "$saw_audio" = 0 ]; then
+    printf '[Audio]\n'
+    printf 'MidiConfig=%s\n' "$midi"
+  fi
+} > "$tmp" 2>/dev/null
+mv -f "$tmp" "$changes" 2>/dev/null || true
 cd "$dir"
