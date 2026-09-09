@@ -28,12 +28,12 @@ if [ "${DEVEL_RELEASE-}" = 1 ]; then
     echo "Making nightly build of OpenTESArena..."
     echo "---------------------------------------------------------------"
     VERSION="$(git ls-remote "$REPO" HEAD | cut -c 1-9 | head -1)"
-    git clone "$REPO" ./OpenTESArena
+    git clone --depth 1 "$REPO" ./OpenTESArena
 else
 	echo "Making stable build of OpenTESArena..."
 	TAG="$(git ls-remote --tags --sort="v:refname" "$REPO" | tail -n1 | sed 's/.*\///; s/\^{}//')"
 	VERSION="$(echo "$TAG" | sed 's/opentesarena-//')"
-	git clone --branch "$TAG" --single-branch "$REPO" ./OpenTESArena
+	git clone --branch "$TAG" --single-branch --depth 1 "$REPO" ./OpenTESArena
 fi
 echo "$VERSION" > ~/version
 
