@@ -12,7 +12,7 @@ pacman -Syu --noconfirm \
 	openal	 	   \
 	pipewire-audio \
 	pipewire-jack  \
-    sdl2     	   \
+    sdl2-compat	   \
 	shaderc		   \
 	vulkan-headers \
     wildmidi
